@@ -1,0 +1,99 @@
+[
+{
+   "model": "crt.city",
+   "pk": 1,
+   "fields": {
+      "c_name": "Andromeda"
+   }
+},
+{
+   "model": "crt.popul",
+   "pk": 1,
+   "fields": {
+      "city": 1,
+      "Year": 1970,
+      "Population": 90000
+   }
+}
+{
+   "model": "crt.popul",
+   "pk": 1,
+   "fields": {
+      "city": 1,
+      "Year": 1971,
+      "Population": 93000
+   }
+}{
+   "model": "crt.popul",
+   "pk": 1,
+   "fields": {
+      "city": 1,
+      "Year": 1972,
+      "Population": 92000
+   }
+}{
+   "model": "crt.popul",
+   "pk": 1,
+   "fields": {
+      "city": 1,
+      "Year": 1973,
+      "Population": 95000
+   }
+}{
+   "model": "crt.popul",
+   "pk": 1,
+   "fields": {
+      "city": 1,
+      "Year": 1974,
+      "Population": 95000
+   }
+}{
+   "model": "crt.popul",
+   "pk": 1,
+   "fields": {
+      "city": 1,
+      "Year": 1975,
+      "Population": 97000
+   }
+}{
+   "model": "crt.popul",
+   "pk": 1,
+   "fields": {
+      "city": 1,
+      "Year": 1976,
+      "Population": 120000
+   }
+}{
+   "model": "crt.popul",
+   "pk": 1,
+   "fields": {
+      "city": 1,
+      "Year": 1977,
+      "Population": 99000
+   }
+}{
+   "model": "crt.popul",
+   "pk": 1,
+   "fields": {
+      "city": 1,
+      "Year": 1978,
+      "Population": 110000
+   }
+}{
+   "model": "crt.popul",
+   "pk": 1,
+   "fields": {
+      "city": 1,
+      "Year": 1979,
+      "Population": 120000
+   }
+}{
+   "model": "crt.popul",
+   "pk": 1,
+   "fields": {
+      "city": 1,
+      "Year": 1980,
+      "Population": 125000
+   }
+}
+]
