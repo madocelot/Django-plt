@@ -3,4 +3,4 @@ This project usues matplotlib to plot graphs in Django framework. It uses no JS 
 
 Example of a chart built with this tool
 
-![alt text](https://github.com/madocelot/Django-plt/blob/master/test.png)
+![chart](https://raw.githubusercontent.com/madocelot/Django-plt/master/test.png)
