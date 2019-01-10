@@ -17,3 +17,20 @@ class Popul(models.Model):
     Population = models.IntegerField()
     def __str__(self):
             return 'Year: {}, population: {}'.format(self.Year, self.Population)
+
+
+class Worker(models.Model):
+    name = models.CharField(max_length=200)
+    def __str__(self):
+            return self.name
+    
+
+class Sale(models.Model):
+    worker = models.ForeignKey(Worker, on_delete=models.CASCADE)
+    year = models.IntegerField()
+    revenue = models.IntegerField()
+    def __str__(self):
+            return 'In {}, {} earned {}'.format(self.year, self.worker, self.revenue)
+
+
+            
