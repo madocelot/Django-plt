@@ -3,4 +3,4 @@ This project usues matplotlib to plot graphs in Django framework. It uses no JS 
 
 
 load DB data with:
-./manage.py loaddata *file*
+python manage.py loaddata *file*
