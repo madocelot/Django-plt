@@ -1,13 +1,13 @@
 from django.http import HttpResponse
 import io
 import matplotlib.pyplot as plt
-import random
-import numpy as np
+#import numpy as np
 import pandas as pd
-from crt.models import Worker, Sale
+from crt.models import Sale
 #hardcoded for now
 
 #linear chart
+
 """
 def setPlt():
     count =  Popul.objects.count()
@@ -21,7 +21,7 @@ def setPlt():
 """
 
 def setPlt():
-    q = list(Sale.objects.all().values()) #TODO query returns worker_id, instead of the name, need to fix that
+    q = list(Sale.objects.all().values()) #//TODO query returns worker_id instead of the name, need to fix that
     df = pd.DataFrame(q)
     df.groupby(['year','worker_id'])['revenue'].apply(lambda x : x.sum()).unstack().plot(kind='bar',stacked=True)
 

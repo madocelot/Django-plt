@@ -1,28 +1,25 @@
-import datetime
+#import datetime
 
 from django.db import models
-from django.utils import timezone
 
 # Create your models here.
 
 class City(models.Model):
     c_name = models.CharField(max_length=200)
     def __str__(self):
-            return self.c_name
-    
+        return self.c_name 
 
 class Popul(models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     Year = models.IntegerField()
     Population = models.IntegerField()
     def __str__(self):
-            return 'Year: {}, population: {}'.format(self.Year, self.Population)
-
+        return 'Year: {}, population: {}'.format(self.Year, self.Population)
 
 class Worker(models.Model):
     name = models.CharField(max_length=200)
     def __str__(self):
-            return self.name
+        return self.name
     
 
 class Sale(models.Model):
@@ -30,7 +27,7 @@ class Sale(models.Model):
     year = models.IntegerField()
     revenue = models.IntegerField()
     def __str__(self):
-            return '{}, {}, {}'.format(self.year, self.worker, self.revenue)
+        return '{}, {}, {}'.format(self.year, self.worker, self.revenue)
 
 
             
