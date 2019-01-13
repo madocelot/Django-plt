@@ -30,7 +30,7 @@ class Sale(models.Model):
     year = models.IntegerField()
     revenue = models.IntegerField()
     def __str__(self):
-            return 'In {}, {} earned {}'.format(self.year, self.worker, self.revenue)
+            return '{}, {}, {}'.format(self.year, self.worker, self.revenue)
 
 
             

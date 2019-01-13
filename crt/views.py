@@ -3,6 +3,7 @@ import io
 import matplotlib.pyplot as plt
 import random
 import numpy as np
+import pandas as pd
 from crt.models import Worker, Sale
 #hardcoded for now
 
@@ -20,27 +21,10 @@ def setPlt():
 """
 
 def setPlt():
-    
-    names = [Worker.objects.get(id = x) for x in range(1, Worker.objects.count()+1)]
-    year_tmp = Sale.objects.values('year').distinct().order_by('year')
-    sales = []
-    years = [x.get('year') for x in year_tmp]
-    N = len(years)
-    for x in names:
-             for y in years:
-                 sales.append(Sale.objects.get(worker = x, year = y).revenue)
-    t = int(len(sales)/2)
-    Hideo = sales[t:]
-    Kojima = sales[: t]
-    ind = np.arange(N)    # the x locations for the groups
-    width = 0.35       # the width of the bars: can also be len(x) sequence
-    p1 = plt.bar(ind, Hideo, width)
-    p2 = plt.bar(ind, Kojima, width,
-                bottom=Hideo)
-    plt.ylabel('Revenue')
-    plt.title('Revenue by worker')
-    plt.xticks(ind, ('2016','2017', '2018'))
-    plt.legend((p1[0], p2[0]), ('Hideo', 'Kojima'))
+    q = list(Sale.objects.all().values()) #TODO query returns worker_id, instead of the name, need to fix that
+    df = pd.DataFrame(q)
+    df.groupby(['year','worker_id'])['revenue'].apply(lambda x : x.sum()).unstack().plot(kind='bar',stacked=True)
+
 
     
 def pltToSvg():
