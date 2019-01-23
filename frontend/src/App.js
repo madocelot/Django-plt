@@ -14,22 +14,17 @@ export default class crtList extends React.Component {
         this.setState({ sale });
       })
   }
+
 /* {this.state.sale} */
   render() {
     return (
       <fragment>
-      <ul>
-        { this.state.sale.map(sale => <li>{sale.revenue}</li>)}
-      </ul>
+      {/* <ul>
+        { this.state.sale.map(sale => <ul>{sale.revenue}</ul>)}
+      </ul> */}
       <div className="chart">
       <Bar
-          data={
-              labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-              datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-              }],  
-              }
+          data= {data}
             width={400}
             height='150'
             options={{
@@ -46,7 +41,7 @@ export default class crtList extends React.Component {
               ticks: {
                   beginAtZero: true
                     },
-              stacked: false
+              stacked: true
                 }]
                   }
                       }}
@@ -56,5 +51,43 @@ export default class crtList extends React.Component {
     );
   }
 
-}
+//   render() {
+//     return (
+//       <div>
+//         <h2>Bar Example (custom size)</h2>
+//         <Bar
+//           data={data}
+//           width={100}
+//           height={50}
+//           options={{
+//             maintainAspectRatio: false
+//           }}
+//         />
+//       </div>
+//     );
+// }
 
+}
+const data = {
+  labels: ['2015', '2016'],
+  datasets: [
+    {
+      label: 'Hideo',
+      backgroundColor: 'rgba(255,99,132,0.2)',
+      borderColor: 'rgba(255,99,132,1)',
+      borderWidth: 1,
+      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+      hoverBorderColor: 'rgba(255,99,132,1)',
+      data: [205,341]
+    },
+    {
+      label: 'Kojima',
+      backgroundColor: 'rgba(180,200,132,0.2)',
+      borderColor: 'rgba(180,200,132,1)',
+      borderWidth: 1,
+      hoverBackgroundColor: 'rgba(180,200,132,0.4)',
+      hoverBorderColor: 'rgba(180,200,132,1)',
+      data: [200,441]
+    }
+  ]
+};
