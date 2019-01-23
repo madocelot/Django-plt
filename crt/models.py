@@ -17,13 +17,13 @@ class Popul(models.Model):
         return 'Year: {}, population: {}'.format(self.Year, self.Population)
 
 class Worker(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, unique=True)
     def __str__(self):
         return self.name
     
 
 class Sale(models.Model):
-    worker = models.ForeignKey(Worker, on_delete=models.CASCADE)
+    worker = models.ForeignKey(Worker, to_field= 'name', on_delete=models.CASCADE)
     year = models.IntegerField()
     revenue = models.IntegerField()
     def __str__(self):

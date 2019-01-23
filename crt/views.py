@@ -1,10 +1,16 @@
 from django.http import HttpResponse
-import io
-import matplotlib.pyplot as plt
+#import io
+#import matplotlib.pyplot as plt
 #import numpy as np
-import pandas as pd
-from crt.models import Sale
-#hardcoded for now
+#import pandas as pd
+from crt.models import Sale, Worker
+from django.shortcuts import render
+from rest_framework import viewsets         
+from .serializers import crtSerializer                
+
+class crtView(viewsets.ModelViewSet):      
+    serializer_class = crtSerializer         
+    queryset = Sale.objects.only('worker', 'year','revenue')        
 
 #linear chart
 
@@ -18,10 +24,10 @@ def setPlt():
     ax.set(xlabel='Year', ylabel='Population',
            title='Population on Andromeda throughout the years')
     ax.grid()
-"""
+
 
 def setPlt():
-    q = list(Sale.objects.all().values()) #//TODO query returns worker_id instead of the name, need to fix that
+    q = list(Sale.objects.order_by('worker_id').values('worker__name', 'year', 'revenue')) #//TODO query returns worker_id instead of the name, need to fix that
     df = pd.DataFrame(q)
     df.groupby(['year','worker_id'])['revenue'].apply(lambda x : x.sum()).unstack().plot(kind='bar',stacked=True)
 
@@ -40,3 +46,4 @@ def get_svg(request):
     plt.cla() # clean up plt so it can be re-used
     response = HttpResponse(svg, content_type='image/svg+xml')
     return response
+"""

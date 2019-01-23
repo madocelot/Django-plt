@@ -1,7 +1,19 @@
-from django.urls import path
+# from django.urls import path
 
-from . import views
+# from . import views
+
+# urlpatterns = [
+#     path('', views.get_svg, name='index'),
+# ]
+
+from django.contrib import admin
+from django.urls import path, include                 
+from rest_framework import routers                    
+from crt import views                            
+
+router = routers.DefaultRouter()                     
+router.register(r'crt', views.crtView, 'Chart')     
 
 urlpatterns = [
-    path('', views.get_svg, name='index'),
+    path('admin/', admin.site.urls),         path('api/', include(router.urls))                # add this
 ]
