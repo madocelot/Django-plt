@@ -14,14 +14,14 @@ export default class crtList extends React.Component {
         this.setState({ sale });
       })
   }
-
+  
 /* {this.state.sale} */
   render() {
     return (
       <fragment>
-      {/* <ul>
-        { this.state.sale.map(sale => <ul>{sale.revenue}</ul>)}
-      </ul> */}
+      <ul>
+        { this.state.sale.map(sale => <ul>{sale.worker}</ul>)}
+      </ul>
       <div className="chart">
       <Bar
           data= {data}
@@ -75,7 +75,7 @@ const data = {
       label: 'Hideo',
       backgroundColor: 'rgba(255,99,132,0.2)',
       borderColor: 'rgba(255,99,132,1)',
-      borderWidth: 1,
+      borderWidth: 2,
       hoverBackgroundColor: 'rgba(255,99,132,0.4)',
       hoverBorderColor: 'rgba(255,99,132,1)',
       data: [205,341]
@@ -84,10 +84,29 @@ const data = {
       label: 'Kojima',
       backgroundColor: 'rgba(180,200,132,0.2)',
       borderColor: 'rgba(180,200,132,1)',
-      borderWidth: 1,
+      borderWidth: 2,
       hoverBackgroundColor: 'rgba(180,200,132,0.4)',
       hoverBorderColor: 'rgba(180,200,132,1)',
       data: [200,441]
+    },
+    {
+      label: 'Fukusima',
+      backgroundColor: 'rgba(180,80,132,0.2)',
+      borderColor: 'rgba(180,80,132,1)',
+      borderWidth: 2,
+      hoverBackgroundColor: 'rgba(180,80,132,0.4)',
+      hoverBorderColor: 'rgba(180,80,132,1)',
+      data: [223,256]
     }
   ]
 };
+
+const getData = () => {
+  try {
+    return axios.get('http://localhost:8000/api/crt/?format=json')
+  } catch (error) {
+    console.error(error)
+  }
+};
+
+
