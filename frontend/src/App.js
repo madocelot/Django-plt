@@ -50,15 +50,15 @@ export default class crtList extends React.Component {
 
         //console.log('a', a, 'value', table[a]);
         let r = [Math.random()*255,Math.random()*255,Math.random()*255]
-        let s = [Math.random()*255,Math.random()*255,Math.random()*255]
+        //let s = [Math.random()*255,Math.random()*255,Math.random()*255]
         dataset.push(
           {
             label: a,
             backgroundColor: 'rgba('+r.toString()+',0.2)',
             borderColor: 'rgba('+r.toString()+',1)',
             borderWidth: 1,          
-            hoverBackgroundColor: 'rgba('+s.toString()+',0.4)',
-            hoverBorderColor: 'rgba('+s.toString()+',1)',   
+            hoverBackgroundColor: 'rgba('+r.toString()+',0.4)',
+            hoverBorderColor: 'rgba('+r.toString()+',1)',   
             data: table[a]
           },
         )
