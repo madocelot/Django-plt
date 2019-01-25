@@ -6,4 +6,4 @@ from .models import Sale, Worker
 class crtSerializer(serializers.ModelSerializer):
     class Meta:
             model = Sale
-            fields = ('worker', 'year', 'revenue')
+            fields = ('year', 'worker', 'revenue')

@@ -10,7 +10,7 @@ from .serializers import crtSerializer
 
 class crtView(viewsets.ModelViewSet):      
     serializer_class = crtSerializer         
-    queryset = Sale.objects.only('worker', 'year','revenue')        
+    queryset = Sale.objects.only('year', 'worker','revenue')       
 
 #linear chart
 
@@ -27,7 +27,7 @@ def setPlt():
 
 
 def setPlt():
-    q = list(Sale.objects.order_by('worker_id').values('worker__name', 'year', 'revenue')) #//TODO query returns worker_id instead of the name, need to fix that
+    q = list(Sale.objects.all().values()) #//TODO query returns worker_id instead of the name, need to fix that
     df = pd.DataFrame(q)
     df.groupby(['year','worker_id'])['revenue'].apply(lambda x : x.sum()).unstack().plot(kind='bar',stacked=True)
 

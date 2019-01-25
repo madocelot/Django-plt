@@ -1,32 +1,115 @@
 import React from 'react';
-import axios from 'axios';
+//import axios from 'axios';
 import {Bar} from 'react-chartjs-2';
+
+// function workertoDataset(worker){
+
+
+//   return dataset}
+
 
 export default class crtList extends React.Component {
   state = {
-    sale: []
+    data: [],
+    years: [],
+    dataset : [],
   }
 
-  componentDidMount() {
-    axios.get(`http://localhost:8000/api/crt/?format=json`)
-      .then(res => {
-        const sale = res.data;
-        this.setState({ sale });
-      })
+
+// formatting JSON and splitting into 2 into 2 arrays 
+  createTable = (x) => {
+    let q = x;
+    let years = [];
+    let table = {};
+    let dataset = []
+    
+    for (let n in q)
+    {
+      //console.log('WWWWW', q[n].worker)
+      table[q[n].worker] = []
+    };
+    for (let i in q){
+      
+      //console.log('o', q[i])
+      //console.log('year', q[i].year)
+      if (!(years.includes(q[i].year)))
+      {
+        years.push(q[i].year)
+      }
+      //console.log('worker', q[i].worker)
+      //console.log('rev', q[i].revenue)
+      
+      
+      table[q[i].worker].push(q[i].revenue)
+      
+           }
+    //console.log('years', years)
+    //console.log('table', table)
+    for (let a in table)
+      {
+
+        //console.log('a', a, 'value', table[a]);
+        let r = [Math.random()*255,Math.random()*255,Math.random()*255]
+        let s = [Math.random()*255,Math.random()*255,Math.random()*255]
+        dataset.push(
+          {
+            label: a,
+            backgroundColor: 'rgba('+r.toString()+',0.2)',
+            borderColor: 'rgba('+r.toString()+',1)',
+            borderWidth: 1,          
+            hoverBackgroundColor: 'rgba('+s.toString()+',0.4)',
+            hoverBorderColor: 'rgba('+s.toString()+',1)',   
+            data: table[a]
+          },
+        )
+      }
+  
+    //console.log('FOR dataset', dataset)
+    return this.setState({years: years, dataset : dataset})
+   }
+
+   //getting data from JSON first thing in the morning
+   componentWillMount() {
+		fetch('http://localhost:8000/api/crt/?format=json')
+      .then(response => response.json())
+			.then(data => {
+        this.setState({data: data })
+        // console.log(this.state.data);
+        // console.log('0:', this.state.data[0]);
+        // console.log('object:', typeof(this.state.data[0]));
+        // console.log(typeof(this.state.data) === undefined);
+        // console.log(this.state.data[0].year);
+        this.createTable(this.state.data);
+		})
+			.catch(err => console.error(this.props.url, err.toString()))
   }
   
-/* {this.state.sale} */
+  
+
+  // componentDidMount() {
+  //   axios.get(`http://localhost:8000/api/crt/?format=json`)
+  //     .then(res => {
+  //       const sale = res.data;
+  //       this.setState({ data });
+  //     })
+  // }
+      //   { <ul>
+      //   { this.state.sale.map(sale => <ul>{sale.worker}</ul>)}
+      // </ul> ,
+  
+//rendering the bar
   render() {
     return (
-      <fragment>
-      <ul>
-        { this.state.sale.map(sale => <ul>{sale.worker}</ul>)}
-      </ul>
-      <div className="chart">
+      <div> 
       <Bar
-          data= {data}
-            width={400}
-            height='150'
+          data= {
+            {
+              labels: this.state.years,
+              datasets : Object.values(this.state.dataset),
+            }
+          }
+            width={300}
+            height= {150}
             options={{
                 tooltips: {
                   mode: 'point',
@@ -47,7 +130,7 @@ export default class crtList extends React.Component {
                       }}
       />
       </div>
-      </fragment>
+      
     );
   }
 
@@ -68,45 +151,34 @@ export default class crtList extends React.Component {
 // }
 
 }
-const data = {
-  labels: ['2015', '2016'],
-  datasets: [
-    {
-      label: 'Hideo',
-      backgroundColor: 'rgba(255,99,132,0.2)',
-      borderColor: 'rgba(255,99,132,1)',
-      borderWidth: 2,
-      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-      hoverBorderColor: 'rgba(255,99,132,1)',
-      data: [205,341]
-    },
-    {
-      label: 'Kojima',
-      backgroundColor: 'rgba(180,200,132,0.2)',
-      borderColor: 'rgba(180,200,132,1)',
-      borderWidth: 2,
-      hoverBackgroundColor: 'rgba(180,200,132,0.4)',
-      hoverBorderColor: 'rgba(180,200,132,1)',
-      data: [200,441]
-    },
-    {
-      label: 'Fukusima',
-      backgroundColor: 'rgba(180,80,132,0.2)',
-      borderColor: 'rgba(180,80,132,1)',
-      borderWidth: 2,
-      hoverBackgroundColor: 'rgba(180,80,132,0.4)',
-      hoverBorderColor: 'rgba(180,80,132,1)',
-      data: [223,256]
-    }
-  ]
-};
+//hardcoded data used for testing
+// const data = {
+//   labels: ['2015','2016'],
+//   datasets: [
+//     {
+//       label: 'Hideo',
+//       backgroundColor: 'rgba(255,99,132,0.2)',
+      
+//       borderWidth: 1,
+      
+//       data: [205, null, 423]
+//     },
+//     {
+//       label: 'Kojima',
+//       backgroundColor: 'rgba(180,200,132,0.2)',
+      
+//       borderWidth: 1,
+//       data: [200,441, 235]
+//     },
+//     {
+//       label: 'Fukusima',
+//       backgroundColor: 'rgba(180,80,132,0.2)',
+      
+//       borderWidth: 1,
+//       data: [223,256, 312]
+//     }
+//   ]
+// };
 
-const getData = () => {
-  try {
-    return axios.get('http://localhost:8000/api/crt/?format=json')
-  } catch (error) {
-    console.error(error)
-  }
-};
 
 

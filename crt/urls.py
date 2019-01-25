@@ -15,7 +15,7 @@ router = routers.DefaultRouter()
 router.register(r'crt', views.crtView, 'Chart')     
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    
     path('api/', include(router.urls))
               
 ]
