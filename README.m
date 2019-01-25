@@ -1,5 +1,5 @@
 # Django-plt
-This project usues matplotlib to plot graphs in Django framework. It uses no JS or front end frameworks. Postgre is used for DB.
+This project usues React framework and Chart.js library to chart a stacked bar chart using data from a DB served by django REST framework.
 
 django REST, Yarn, React, react-chartjs-2
 
